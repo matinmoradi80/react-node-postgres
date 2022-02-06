@@ -1,26 +1,27 @@
-import { Button, Modal, Table } from "antd";
 import { useEffect, useState } from "react";
-import AddressForm from "./Form";
+import { Button, Table, Modal } from "antd";
+import ClientForm from "./Form";
 
-export default function Address() {
-  const [address, setAddress] = useState();
+export default function Client() {
+  const [client, setClient] = useState();
   const [visible, setVisible] = useState(false);
+
   useEffect(() => {
-    getAddress();
+    getClient();
   }, []);
 
-  function getAddress() {
-    fetch("http://localhost:3001/address")
+  function getClient() {
+    fetch("http://localhost:3001/client")
       .then((response) => {
         return response.text();
       })
       .then((data) => {
-        setAddress(JSON.parse(data));
+        setClient(JSON.parse(data));
       });
   }
 
-  function deleteAddress(postalcode) {
-    fetch(`http://localhost:3001/address/${postalcode}`, {
+  function deleteClient(nationalcode) {
+    fetch(`http://localhost:3001/client/${nationalcode}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -28,12 +29,12 @@ export default function Address() {
       })
       .then((data) => {
         alert(data);
-        getAddress();
+        getClient();
       });
   }
 
-  function createAddress(data) {
-    fetch("http://localhost:3001/address", {
+  function createClient(data) {
+    fetch("http://localhost:3001/client", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,54 +46,32 @@ export default function Address() {
       })
       .then((data) => {
         alert(data);
-        getAddress();
+        getClient();
       });
   }
 
   const columns = [
     {
-      title: "postalcode",
-      dataIndex: "postalcode",
-      key: "postalcode",
+      title: "nationalcode",
+      dataIndex: "nationalcode",
+      key: "nationalcode",
     },
     {
-      title: "state",
-      dataIndex: "state",
-      key: "state",
-    },
-    {
-      title: "city",
-      dataIndex: "city",
-      key: "city",
-    },
-    {
-      title: "street",
-      dataIndex: "street",
-      key: "street",
-    },
-    {
-      title: "vallay",
-      dataIndex: "vallay",
-      key: "vallay",
-    },
-    {
-      title: "plate",
-      dataIndex: "plate",
-      key: "plate",
-    },
-    {
-      title: "floor",
-      dataIndex: "floor",
-      key: "floor",
+      title: "wallet",
+      dataIndex: "wallet",
+      key: "wallet",
     },
     {
       title: "delete",
       key: "delete",
       render: (text, record) => (
-        <Button onClick={() => deleteAddress(record.postalcode)}>delete</Button>
+        <Button onClick={() => deleteClient(record.nationalcode)}>
+          delete
+        </Button>
       ),
     },
   ];
+
   return (
     <div>
       <Button
@@ -100,28 +79,28 @@ export default function Address() {
         type="primary"
         onClick={() => setVisible(true)}
       >
-        add address
+        add client
       </Button>
       <Modal
         style={{
           top: 20,
         }}
-        title="new address"
+        title="new client"
         width={576}
         visible={visible}
         footer={null}
         onCancel={() => setVisible(false)}
       >
-        <AddressForm
+        <ClientForm
           visible={visible}
           onSubmit={(data, resetForm) => {
-            createAddress(data);
+            createClient(data);
             resetForm();
             setVisible(false);
           }}
         />
       </Modal>
-      <Table columns={columns} dataSource={address} />
+      <Table columns={columns} dataSource={client} />
     </div>
   );
 }

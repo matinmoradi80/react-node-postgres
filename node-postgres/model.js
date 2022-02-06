@@ -46,7 +46,7 @@ const createUser = (body) => {
                 console.log(error);
               } else {
                 resolve(
-                  `A new merchant has been added added: ${JSON.stringify(
+                  `A new user has been added added: ${JSON.stringify(
                     results.rows[0]
                   )}`
                 );
@@ -133,6 +133,162 @@ const deleteAddress = (postalcode) => {
   });
 };
 
+const createAddress = (body) => {
+  return new Promise(function (resolve, reject) {
+    const { postalcode, state, city, street, vallay, plate, floor } = body;
+    pool.query(
+      "INSERT INTO address (postalcode, state, city, street, vallay, plate, floor) VALUES ($1, $2, $3, $4, $5, $6, $7);",
+      [postalcode, state, city, street, vallay, plate, floor],
+      (error, results) => {
+        if (error) {
+          reject(error);
+          console.log(error);
+        } else {
+          resolve(
+            `A new address has been added: ${JSON.stringify(results.rows[0])}`
+          );
+        }
+      }
+    );
+  });
+};
+
+const getClientAddress = () => {
+  return new Promise(function (resolve, reject) {
+    pool.query("SELECT * FROM clientaddress", (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results.rows);
+      }
+    });
+  });
+};
+
+const deleteClientAddress = (postalcode, nationalcode) => {
+  return new Promise(function (resolve, reject) {
+    pool.query(
+      "DELETE FROM clientAddress WHERE postalcode = $1 and nationalcode = $2",
+      [postalcode, nationalcode],
+      (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(`clientaddress deleted with username: ${postalcode}`);
+        }
+      }
+    );
+  });
+};
+
+const createClientAddress = (body) => {
+  return new Promise(function (resolve, reject) {
+    const { postalcode, nationalcode } = body;
+    pool.query(
+      "INSERT INTO clientaddress (postalcode, nationalcode) VALUES ($1, $2);",
+      [postalcode, nationalcode],
+      (error, results) => {
+        if (error) {
+          reject(error);
+          console.log(error);
+        } else {
+          resolve(
+            `A new clientAddress has been added: ${JSON.stringify(
+              results.rows[0]
+            )}`
+          );
+        }
+      }
+    );
+  });
+};
+
+const getClientAddressView = () => {
+  return new Promise(function (resolve, reject) {
+    pool.query("SELECT * FROM clientaddressview", (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results.rows);
+      }
+    });
+  });
+};
+
+const getClient = () => {
+  return new Promise(function (resolve, reject) {
+    pool.query("SELECT * FROM client", (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results.rows);
+      }
+    });
+  });
+};
+
+const deleteClient = (nationalcode) => {
+  return new Promise(function (resolve, reject) {
+    pool.query(
+      "DELETE FROM client WHERE nationalcode = $1",
+      [nationalcode],
+      (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(`clientaddress deleted with nationalcode: ${nationalcode}`);
+        }
+      }
+    );
+  });
+};
+
+const createClient = (body) => {
+  return new Promise(function (resolve, reject) {
+    const { nationalcode, wallet } = body;
+    pool.query(
+      "INSERT INTO client (nationalcode, wallet) VALUES ($1, $2);",
+      [nationalcode, wallet],
+      (error, results) => {
+        if (error) {
+          reject(error);
+          console.log(error);
+        } else {
+          resolve(
+            `A new clientAddress has been added: ${JSON.stringify(
+              results.rows[0]
+            )}`
+          );
+        }
+      }
+    );
+  });
+};
+
+const getClientUser = () => {
+  return new Promise(function (resolve, reject) {
+    pool.query("SELECT * FROM clientuser", (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results.rows);
+      }
+    });
+  });
+};
+
+const getManager = () => {
+  return new Promise(function (resolve, reject) {
+    pool.query("SELECT * FROM manager", (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results.rows);
+      }
+    });
+  });
+};
+
 module.exports = {
   getUsers,
   createUser,
@@ -141,4 +297,14 @@ module.exports = {
   deleteLoginInfo,
   getAddress,
   deleteAddress,
+  createAddress,
+  getClientAddress,
+  deleteClientAddress,
+  createClientAddress,
+  getClientAddressView,
+  getClient,
+  deleteClient,
+  createClient,
+  getClientUser,
+  getManager,
 };

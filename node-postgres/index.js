@@ -93,6 +93,116 @@ app.delete("/address/:postalcode", (req, res) => {
     });
 });
 
+app.post("/address", (req, res) => {
+  model
+    .createAddress(req.body)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.get("/clientaddress", (req, res) => {
+  model
+    .getClientAddress()
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.delete("/clientaddress/:postalcode/:nationalcode", (req, res) => {
+  model
+    .deleteClientAddress(req.params.postalcode, req.params.nationalcode)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.post("/clientaddress", (req, res) => {
+  model
+    .createClientAddress(req.body)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.get("/clientaddressview", (req, res) => {
+  model
+    .getClientAddressView()
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.get("/client", (req, res) => {
+  model
+    .getClient()
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.delete("/client/:nationalcode", (req, res) => {
+  model
+    .deleteClient(req.params.nationalcode)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.post("/client", (req, res) => {
+  model
+    .createClient(req.body)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.get("/clientuser", (req, res) => {
+  model
+    .getClientUser()
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
+app.get("/manager", (req, res) => {
+  model
+    .getManager()
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });

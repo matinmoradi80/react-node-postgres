@@ -1,5 +1,6 @@
 import { Row, Form, Input, Col, Button } from "antd";
-export default function UserForm({ onSubmit, initialValues, visible }) {
+
+export default function AddressForm({ onSubmit, initialValues, visible }) {
   const [form] = Form.useForm();
 
   const onFinish = (data) => {
@@ -11,32 +12,42 @@ export default function UserForm({ onSubmit, initialValues, visible }) {
       form={form}
       layout="vertical"
       hideRequiredMark={true}
-      name="new_user"
+      name="new_address"
       onFinish={onFinish}
     >
       <Row gutter={16}>
         <Col span={24}>
-          <Form.Item label="nationalcode" name="nationalcode">
+          <Form.Item label="postalcode" name="postalcode">
             <Input />
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Form.Item label="firstname" name="firstname">
+          <Form.Item label="state" name="state">
             <Input />
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Form.Item label="lastname" name="lastname">
+          <Form.Item label="city" name="city">
             <Input />
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Form.Item label="username" name="username">
+          <Form.Item label="street" name="street">
             <Input />
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Form.Item label="password" name="password">
+          <Form.Item label="vallay" name="vallay">
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item label="plate" name="plate">
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item label="floor" name="floor">
             <Input />
           </Form.Item>
         </Col>

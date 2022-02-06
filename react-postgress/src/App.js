@@ -1,11 +1,17 @@
 import React from "react";
 import User from "./user/User";
 import { Menu } from "antd";
-import { Switch, Route, Link, Redirect } from "react-router-dom";
+import { Switch, Route, Link, Redirect, useLocation } from "react-router-dom";
 import LoginInfo from "./loginInfo/LoginInfo";
 import Address from "./address/Address";
+import ClientAddress from "./clientAddress/ClientAddress";
+import ClientAddressView from "./clienAddressView/ClientAddressView";
+import Client from "./client/Client";
+import ClientUser from "./clientUserView/ClientUser";
+import Manager from "./manager/Manager";
 
 function App() {
+  const location = useLocation();
   return (
     <div>
       <Menu
@@ -16,17 +22,32 @@ function App() {
           bottom: "0",
           width: "256px",
         }}
-        defaultSelectedKeys={["1"]}
+        selectedKeys={[location.pathname]}
         mode="inline"
       >
-        <Menu.Item key="1">
+        <Menu.Item key="/user">
           <Link to="/user">User</Link>
         </Menu.Item>
-        <Menu.Item key="2">
+        <Menu.Item key="/logininfo">
           <Link to="/logininfo">Login Info</Link>
         </Menu.Item>
-        <Menu.Item key="3">
+        <Menu.Item key="/address">
           <Link to="/address">Address</Link>
+        </Menu.Item>
+        <Menu.Item key="/clientaddress">
+          <Link to="/clientaddress">Client Address</Link>
+        </Menu.Item>
+        <Menu.Item key="/client">
+          <Link to="/client">Client</Link>
+        </Menu.Item>
+        <Menu.Item key="/manager">
+          <Link to="/manager">Manager</Link>
+        </Menu.Item>
+        <Menu.Item key="/clientuser">
+          <Link to="/clientuser">Client User View</Link>
+        </Menu.Item>
+        <Menu.Item key="/clientaddressview">
+          <Link to="/clientaddressview">Client Address View</Link>
         </Menu.Item>
       </Menu>
       <div style={{ marginLeft: "300px" }}>
@@ -39,6 +60,21 @@ function App() {
           </Route>
           <Route exact path="/address">
             <Address />
+          </Route>
+          <Route exact path="/clientaddress">
+            <ClientAddress />
+          </Route>
+          <Route exact path="/clientaddressview">
+            <ClientAddressView />
+          </Route>
+          <Route exact path="/client">
+            <Client />
+          </Route>
+          <Route exact path="/clientuser">
+            <ClientUser />
+          </Route>
+          <Route exact path="/manager">
+            <Manager />
           </Route>
           <Route path="/">
             <Redirect to="/user" />

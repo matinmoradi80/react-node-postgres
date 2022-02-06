@@ -1,5 +1,6 @@
-import { Row, Form, Input, Col, Button } from "antd";
-export default function UserForm({ onSubmit, initialValues, visible }) {
+import { Form, Row, Col, Input, Button } from "antd";
+
+export default function ClientForm({ onSubmit, initialValues, visible }) {
   const [form] = Form.useForm();
 
   const onFinish = (data) => {
@@ -11,7 +12,7 @@ export default function UserForm({ onSubmit, initialValues, visible }) {
       form={form}
       layout="vertical"
       hideRequiredMark={true}
-      name="new_user"
+      name="new_client"
       onFinish={onFinish}
     >
       <Row gutter={16}>
@@ -21,22 +22,7 @@ export default function UserForm({ onSubmit, initialValues, visible }) {
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Form.Item label="firstname" name="firstname">
-            <Input />
-          </Form.Item>
-        </Col>
-        <Col span={24}>
-          <Form.Item label="lastname" name="lastname">
-            <Input />
-          </Form.Item>
-        </Col>
-        <Col span={24}>
-          <Form.Item label="username" name="username">
-            <Input />
-          </Form.Item>
-        </Col>
-        <Col span={24}>
-          <Form.Item label="password" name="password">
+          <Form.Item label="wallet" name="wallet">
             <Input />
           </Form.Item>
         </Col>
