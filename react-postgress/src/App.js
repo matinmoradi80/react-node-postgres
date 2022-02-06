@@ -9,6 +9,9 @@ import ClientAddressView from "./clienAddressView/ClientAddressView";
 import Client from "./client/Client";
 import ClientUser from "./clientUserView/ClientUser";
 import Manager from "./manager/Manager";
+import ProductCategory from "./productCategory/productCategory";
+import Product from "./product/Product";
+import Comment from "./comment/Comment";
 
 function App() {
   const location = useLocation();
@@ -43,6 +46,15 @@ function App() {
         <Menu.Item key="/manager">
           <Link to="/manager">Manager</Link>
         </Menu.Item>
+        <Menu.Item key="/productcategory">
+          <Link to="/productcategory">Product Category</Link>
+        </Menu.Item>
+        <Menu.Item key="/product">
+          <Link to="/product">Product</Link>
+        </Menu.Item>
+        <Menu.Item key="/comment">
+          <Link to="/comment">Comment</Link>
+        </Menu.Item>
         <Menu.Item key="/clientuser">
           <Link to="/clientuser">Client User View</Link>
         </Menu.Item>
@@ -75,6 +87,15 @@ function App() {
           </Route>
           <Route exact path="/manager">
             <Manager />
+          </Route>
+          <Route exact path="/productcategory">
+            <ProductCategory />
+          </Route>
+          <Route exact path="/product">
+            <Product />
+          </Route>
+          <Route exact path="/comment">
+            <Comment />
           </Route>
           <Route path="/">
             <Redirect to="/user" />
